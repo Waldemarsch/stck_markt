@@ -17,9 +17,9 @@ func NewRedisRepo(db *redis.Client) *RedisRepo {
 	}
 }
 
-func (r *RedisRepo) StoreStocks(ctx context.Context, stockCompanies []*models.StockCompany) error {
+func (r *RedisRepo) StoreCompanyStocks(ctx context.Context, stockCompanies []*models.StockCompany) error {
 	for _, stockCompany := range stockCompanies {
-		err := r.db.Set(ctx, stockCompany.Company, stockCompany.Stocks, 100*time.Second).Err()
+		err := r.db.Set(ctx, stockCompany.Company, stockCompany.Stocks, 1000*time.Second).Err()
 
 		if err != nil {
 			return err
