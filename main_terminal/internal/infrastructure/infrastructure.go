@@ -4,12 +4,10 @@ import (
 	"context"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
+	"main_terminal/internal/infrastructure/api"
 	"main_terminal/internal/infrastructure/cache"
 	"main_terminal/internal/models"
 )
-
-type API interface {
-}
 
 type Repository interface {
 }
@@ -19,14 +17,14 @@ type Cache interface {
 }
 
 type Infrastructure struct {
-	API
+	API *api.API
 	Repository
 	Cache
 }
 
-func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client) *Infrastructure {
+func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client, exAPI string) *Infrastructure {
 	return &Infrastructure{
-		API:        nil,
+		API:        api.NewAPI(exAPI),
 		Repository: nil,
 		Cache:      cache.NewRedisRepo(Cdb),
 	}

@@ -17,9 +17,9 @@ type API struct {
 	ExchangeAPI
 }
 
-func NewAPI(exApi string) *API {
+func NewAPI(exAPI string) *API {
 	return &API{
 		WebAPI:      nil,
-		ExchangeAPI: NewMoexAPI(exApi, ""),
+		ExchangeAPI: NewMoexAPI(exAPI, ""),
 	}
 }
