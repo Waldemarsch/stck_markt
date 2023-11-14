@@ -1,9 +1,15 @@
 package api
 
+import (
+	"context"
+	"main_terminal/internal/models"
+)
+
 type WebAPI interface {
 }
 
 type ExchangeAPI interface {
+	GetStocks(context.Context, []models.StockCompany, map[string][]string) ([]*models.StockCompany, error)
 }
 
 type API struct {
@@ -11,9 +17,9 @@ type API struct {
 	ExchangeAPI
 }
 
-func NewAPI() *API {
+func NewAPI(exApi string) *API {
 	return &API{
 		WebAPI:      nil,
-		ExchangeAPI: nil,
+		ExchangeAPI: NewMoexAPI(exApi, ""),
 	}
 }
