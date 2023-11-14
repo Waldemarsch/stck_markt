@@ -8,7 +8,7 @@ import (
 	"main_terminal/internal/models"
 )
 
-type WebAPI interface {
+type API interface {
 }
 
 type Repository interface {
@@ -19,14 +19,14 @@ type Cache interface {
 }
 
 type Infrastructure struct {
-	WebAPI
+	API
 	Repository
 	Cache
 }
 
 func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client) *Infrastructure {
 	return &Infrastructure{
-		WebAPI:     nil,
+		API:        nil,
 		Repository: nil,
 		Cache:      cache.NewRedisRepo(Cdb),
 	}
