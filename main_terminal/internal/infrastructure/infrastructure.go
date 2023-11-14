@@ -5,7 +5,6 @@ import (
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 	"main_terminal/internal/infrastructure/cache"
-	"main_terminal/internal/infrastructure/repository"
 	"main_terminal/internal/models"
 )
 
@@ -28,7 +27,7 @@ type Infrastructure struct {
 func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client) *Infrastructure {
 	return &Infrastructure{
 		WebAPI:     nil,
-		Repository: repository.NewSqliteRepo(Rdb),
+		Repository: nil,
 		Cache:      cache.NewRedisRepo(Cdb),
 	}
 }
