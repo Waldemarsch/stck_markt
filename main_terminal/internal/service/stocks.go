@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"main_terminal/internal/infrastructure"
 	"main_terminal/internal/models"
 )
@@ -15,6 +16,18 @@ func NewStockLogic(infra *infrastructure.Infrastructure) *StockLogic {
 	}
 }
 
-func (s *StockLogic) GetStockList(companies []*models.StockCompany) []*models.StockCompany {
-	return nil
+func (s *StockLogic) GetStockList(ctx context.Context, companies []*models.StockCompany, params map[string][]string) ([]*models.StockCompany, error) {
+	comp, err := s.Infra.API.ExchangeAPI.GetStocks(ctx, companies, params)
+
+	if err != nil {
+		return nil, err
+	}
+
+	err = s.Infra.Cache.StoreCompanyStocks(ctx, comp)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
 }

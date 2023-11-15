@@ -36,7 +36,7 @@ func NewMoexAPI(stockURL string, currencyURL string) *MoexAPI {
 	}
 }
 
-func (a *MoexAPI) GetStocks(ctx context.Context, companies []models.StockCompany, params map[string][]string) ([]*models.StockCompany, error) {
+func (a *MoexAPI) GetStocks(ctx context.Context, companies []*models.StockCompany, params map[string][]string) ([]*models.StockCompany, error) {
 	var resultedCompanies []*models.StockCompany
 	for _, comp := range companies {
 		var res MoexAPIResponse

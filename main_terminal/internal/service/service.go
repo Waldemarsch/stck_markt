@@ -1,8 +1,13 @@
 package service
 
-import "main_terminal/internal/infrastructure"
+import (
+	"context"
+	"main_terminal/internal/infrastructure"
+	"main_terminal/internal/models"
+)
 
 type Stocks interface {
+	GetStockList(context.Context, []*models.StockCompany, map[string][]string) ([]*models.StockCompany, error)
 }
 
 type Currency interface {
