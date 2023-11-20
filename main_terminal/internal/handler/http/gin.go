@@ -17,6 +17,16 @@ func NewGinHttp(s *service.Service) *GinHttp {
 
 func (h *GinHttp) InitRoutes() *gin.Engine {
 	router := gin.New()
+	api := router.Group("/api")
+	{
+		stocks := api.GET("/stocks")
+		{
+			stocksShort := stocks.GET("/short")
+			{
+				stocksShort.GET("/get", h.stocksShortGet)
+			}
+		}
+	}
 
 	return router
 }
