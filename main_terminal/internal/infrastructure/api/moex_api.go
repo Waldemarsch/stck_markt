@@ -36,38 +36,32 @@ func NewMoexAPI(stockURL string, currencyURL string) *MoexAPI {
 	}
 }
 
-func (a *MoexAPI) GetStocks(ctx context.Context, companies []*models.StockCompany, params map[string][]string) ([]*models.StockCompany, error) {
-	var resultedCompanies []*models.StockCompany
-	for _, comp := range companies {
-		var res MoexAPIResponse
-		req := MoexAPIRequest{URL: a.stockURL, Params: params}
-		err := requests.URL(req.URL).Pathf("/%s/trades.json", comp.Company).Params(req.Params).ToDeserializer(xml.Unmarshal, &res).Fetch(ctx)
+func (a *MoexAPI) GetStocks(ctx context.Context, company *models.StockCompany, params map[string][]string) (*models.StockCompany, error) {
+	var res MoexAPIResponse
+	req := MoexAPIRequest{URL: a.stockURL, Params: params}
+	err := requests.URL(req.URL).Pathf("/%s/trades.json", company).Params(req.Params).ToDeserializer(xml.Unmarshal, &res).Fetch(ctx)
 
-		if err != nil {
-			return nil, err
-		}
-
-		resJSON, err := json.Marshal(res.Data.Rows)
-
-		if err != nil {
-			return nil, err
-		}
-
-		var stocksToResult []models.Stock
-		err = json.Unmarshal(resJSON, &stocksToResult)
-
-		if err != nil {
-			return nil, err
-		}
-
-		companyToResult := &models.StockCompany{
-			Company: comp.Company,
-			Stocks:  stocksToResult,
-		}
-
-		resultedCompanies = append(resultedCompanies, companyToResult)
-
+	if err != nil {
+		return nil, err
 	}
 
-	return resultedCompanies, nil
+	resJSON, err := json.Marshal(res.Data.Rows)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var stocksToResult []models.Stock
+	err = json.Unmarshal(resJSON, &stocksToResult)
+
+	if err != nil {
+		return nil, err
+	}
+
+	companyToResult := &models.StockCompany{
+		Company: company.Company,
+		Stocks:  stocksToResult,
+	}
+
+	return companyToResult, nil
 }

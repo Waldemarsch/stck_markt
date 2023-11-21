@@ -9,7 +9,7 @@ type WebAPI interface {
 }
 
 type ExchangeAPI interface {
-	GetStocks(context.Context, []*models.StockCompany, map[string][]string) ([]*models.StockCompany, error)
+	GetStocks(context.Context, *models.StockCompany, map[string][]string) (*models.StockCompany, error)
 }
 
 type API struct {
