@@ -13,7 +13,7 @@ type Repository interface {
 }
 
 type Cache interface {
-	StoreCompanyStocks(context.Context, []*models.StockCompany) error
+	StoreCompanyStocks(context.Context, *models.StockCompany) error
 }
 
 type Infrastructure struct {

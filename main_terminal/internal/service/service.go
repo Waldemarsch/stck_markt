@@ -7,7 +7,7 @@ import (
 )
 
 type Stocks interface {
-	GetStockList(context.Context, []*models.StockCompany, map[string][]string) ([]*models.StockCompany, error)
+	GetStock(context.Context, *models.StockCompany, map[string][]string) (*models.StockCompany, error)
 }
 
 type Currency interface {

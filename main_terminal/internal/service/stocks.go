@@ -16,8 +16,8 @@ func NewStockLogic(infra *infrastructure.Infrastructure) *StockLogic {
 	}
 }
 
-func (s *StockLogic) GetStockList(ctx context.Context, companies []*models.StockCompany, params map[string][]string) ([]*models.StockCompany, error) {
-	comp, err := s.Infra.API.ExchangeAPI.GetStocks(ctx, companies, params)
+func (s *StockLogic) GetStock(ctx context.Context, company *models.StockCompany, params map[string][]string) (*models.StockCompany, error) {
+	comp, err := s.Infra.API.ExchangeAPI.GetStocks(ctx, company, params)
 
 	if err != nil {
 		return nil, err
