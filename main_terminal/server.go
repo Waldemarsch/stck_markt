@@ -1,4 +1,4 @@
-package server
+package main_terminal
 
 import (
 	"context"
