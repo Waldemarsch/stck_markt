@@ -1,0 +1,5 @@
+port: "8000"
+
+exAPI:
+  stocksAPI: "https://iss.moex.com/iss/engines/stock/markets/shares/boards/tqbr/securities"
+  currencyAPI: ""
