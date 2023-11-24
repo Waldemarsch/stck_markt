@@ -1,11 +1,16 @@
 package handler
 
-import "github.com/gin-gonic/gin"
-
-type HttpHandler interface {
-	InitRoutes() *gin.Engine
-}
+import (
+	http_custom "main_terminal/internal/handler/http"
+	"main_terminal/internal/service"
+)
 
 type Handler struct {
-	HttpHandler
+	GinHttp *http_custom.GinHttp
+}
+
+func NewHandler(s *service.Service) *Handler {
+	return &Handler{
+		GinHttp: http_custom.NewGinHttp(s),
+	}
 }

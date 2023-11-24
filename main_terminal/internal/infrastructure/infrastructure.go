@@ -1,24 +1,31 @@
 package infrastructure
 
 import (
+	"context"
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
-	"main_terminal/internal/infrastructure/repository"
+	"main_terminal/internal/infrastructure/api"
+	"main_terminal/internal/infrastructure/cache"
+	"main_terminal/internal/models"
 )
-
-type WebAPI interface {
-}
 
 type Repository interface {
 }
 
-type Infrastructure struct {
-	WebAPI
-	Repository
+type Cache interface {
+	StoreCompanyStocks(context.Context, *models.StockCompany) error
 }
 
-func NewInfrastructure(db *gorm.DB) *Infrastructure {
+type Infrastructure struct {
+	API *api.API
+	Repository
+	Cache
+}
+
+func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client, stockAPI string, currencyAPI string) *Infrastructure {
 	return &Infrastructure{
-		WebAPI:     nil,
-		Repository: repository.NewSqliteRepo(db),
+		API:        api.NewAPI(stockAPI, currencyAPI),
+		Repository: nil,
+		Cache:      cache.NewRedisRepo(Cdb),
 	}
 }
