@@ -17,9 +17,9 @@ type API struct {
 	ExchangeAPI
 }
 
-func NewAPI(exAPI string) *API {
+func NewAPI(stockAPI string, currencyAPI string) *API {
 	return &API{
 		WebAPI:      nil,
-		ExchangeAPI: NewMoexAPI(exAPI, ""),
+		ExchangeAPI: NewMoexAPI(stockAPI, currencyAPI),
 	}
 }
