@@ -20,7 +20,7 @@ type Service struct {
 
 func NewService(i *infrastructure.Infrastructure) *Service {
 	return &Service{
-		Stocks:   nil,
+		Stocks:   NewStockLogic(i),
 		Currency: nil,
 	}
 }
