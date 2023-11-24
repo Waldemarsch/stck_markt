@@ -23,11 +23,11 @@ func (s *StockLogic) GetStock(ctx context.Context, company *models.StockCompany,
 		return nil, err
 	}
 
-	err = s.Infra.Cache.StoreCompanyStocks(ctx, comp)
+	//err = s.Infra.Cache.StoreCompanyStocks(ctx, comp)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return nil, nil
+	return comp, nil
 }

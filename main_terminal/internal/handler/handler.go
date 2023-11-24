@@ -6,7 +6,7 @@ import (
 )
 
 type Handler struct {
-	*http_custom.GinHttp
+	GinHttp *http_custom.GinHttp
 }
 
 func NewHandler(s *service.Service) *Handler {

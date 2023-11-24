@@ -2,6 +2,7 @@ package http_custom
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"main_terminal/internal/models"
 	"net/http"
 )
@@ -25,7 +26,7 @@ func (h *GinHttp) stocksShortGet(c *gin.Context) {
 		return
 	}
 
-	var bodyOut *webApiBodyOutcoming
+	bodyOut := new(webApiBodyOutcoming)
 
 	for _, company := range bodyIn.Companies {
 		compStock := &models.StockCompany{
@@ -35,6 +36,7 @@ func (h *GinHttp) stocksShortGet(c *gin.Context) {
 		compStock, err = h.service.GetStock(c, compStock, bodyIn.Params)
 
 		if err != nil {
+			log.Println("Error while getting stocks short: ", err.Error())
 			c.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
