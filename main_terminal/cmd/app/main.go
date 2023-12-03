@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
 	"log"
 	"main_terminal"
@@ -21,7 +22,11 @@ func main() {
 
 	infrastructures := infrastructure.NewInfrastructure(
 		nil,
-		nil,
+		redis.NewClient(&redis.Options{
+			Addr:     viper.GetString("cache.redis.Addr"),
+			Password: viper.GetString("cache.redis.Password"),
+			DB:       viper.GetInt("cache.redis.DB"),
+		}),
 		viper.GetString("exAPI.stocksAPI"),
 		viper.GetString("exAPI.currencyAPI"),
 	)

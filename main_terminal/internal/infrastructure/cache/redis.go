@@ -3,6 +3,7 @@ package cache
 import (
 	"context"
 	"github.com/redis/go-redis/v9"
+	"log"
 	"main_terminal/internal/models"
 	"time"
 )
@@ -24,6 +25,8 @@ func (r *RedisRepo) StoreCompanyStocks(ctx context.Context, stockCompany *models
 	if err != nil {
 		return err
 	}
+
+	log.Println("Stored to cache: ", stockCompany.Company)
 
 	return nil
 }

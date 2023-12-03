@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  main_terminal:
+    build:
+      context: ./main_terminal
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    environment:
+      - REDIS_PORT=6400
+      - REDIS_PASSWORD=1
+      - REDIS_DATABASES=0
+    ports:
+      - "6400:6400"

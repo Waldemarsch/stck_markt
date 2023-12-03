@@ -17,6 +17,8 @@ type webApiBodyOutcoming struct {
 }
 
 func (h *GinHttp) stocksShortGet(c *gin.Context) {
+	log.Println("Got request!")
+
 	var bodyIn *webApiBodyIncoming
 
 	err := c.BindJSON(&bodyIn)
