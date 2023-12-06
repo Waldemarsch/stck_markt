@@ -16,7 +16,7 @@ import (
 
 func main() {
 
-	if err := initConfig(); err != nil {
+	if err := InitConfig(); err != nil {
 		log.Fatalf("Error while initializating configs: %s", err.Error())
 	}
 
@@ -54,7 +54,7 @@ func main() {
 	}
 }
 
-func initConfig() error {
+func InitConfig() error {
 	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
 	return viper.ReadInConfig()
