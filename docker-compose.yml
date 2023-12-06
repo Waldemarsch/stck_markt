@@ -12,8 +12,8 @@ services:
   redis:
     image: redis:latest
     environment:
-      - REDIS_PORT=6400
+      - REDIS_PORT=6379
       - REDIS_PASSWORD=1
       - REDIS_DATABASES=0
     ports:
-      - "6400:6400"
+      - "6500:6379"
