@@ -22,10 +22,10 @@ type Infrastructure struct {
 	Cache
 }
 
-func NewInfrastructure(Rdb *gorm.DB, Cdb *redis.Client, stockAPI string, currencyAPI string) *Infrastructure {
+func NewInfrastructure(Rdb *gorm.DB, CConfig *redis.Options, stockAPI string, currencyAPI string) *Infrastructure {
 	return &Infrastructure{
 		API:        api.NewAPI(stockAPI, currencyAPI),
 		Repository: nil,
-		Cache:      cache.NewRedisRepo(Cdb),
+		Cache:      cache.NewRedisRepo(CConfig),
 	}
 }

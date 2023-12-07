@@ -13,9 +13,9 @@ type RedisRepo struct {
 	db *redis.Client
 }
 
-func NewRedisRepo(db *redis.Client) *RedisRepo {
+func NewRedisRepo(CConfig *redis.Options) *RedisRepo {
 	return &RedisRepo{
-		db: db,
+		db: redis.NewClient(CConfig),
 	}
 }
 

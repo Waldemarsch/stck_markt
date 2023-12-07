@@ -20,15 +20,19 @@ func main() {
 		log.Fatalf("Error while initializating configs: %s", err.Error())
 	}
 
+	CConfig := &redis.Options{
+		Addr:     viper.GetString("cache.redis.Addr"),
+		Password: viper.GetString("cache.redis.Password"),
+		DB:       viper.GetInt("cache.redis.DB"),
+	}
+	StocksAPI := viper.GetString("exAPI.stocksAPI")
+	CurrencyAPI := viper.GetString("exAPI.currencyAPI")
+
 	infrastructures := infrastructure.NewInfrastructure(
 		nil,
-		redis.NewClient(&redis.Options{
-			Addr:     viper.GetString("cache.redis.Addr"),
-			Password: viper.GetString("cache.redis.Password"),
-			DB:       viper.GetInt("cache.redis.DB"),
-		}),
-		viper.GetString("exAPI.stocksAPI"),
-		viper.GetString("exAPI.currencyAPI"),
+		CConfig,
+		StocksAPI,
+		CurrencyAPI,
 	)
 
 	services := service.NewService(infrastructures)
