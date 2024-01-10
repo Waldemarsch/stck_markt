@@ -21,7 +21,7 @@ func (h *GinHttp) stocksShortGet(c *gin.Context) {
 
 	var bodyIn *webApiBodyIncoming
 
-	err := c.BindJSON(&bodyIn)
+	err := c.ShouldBindJSON(&bodyIn)
 
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
